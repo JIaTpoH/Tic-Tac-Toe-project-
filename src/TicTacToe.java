@@ -1,16 +1,17 @@
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class TicTacToe extends JFrame {
+public class TicTacToe extends JFrame  {
   private final JButton[][] buttons;
   private char currentPlayer;
 
   public TicTacToe() {
-    super("Крестики-нолики");
+    super("TicTacToe");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(300, 300);
     setLocationRelativeTo(null);
+
 
     buttons = new JButton[3][3];
     JPanel panel = new JPanel(new GridLayout(3, 3));
@@ -39,9 +40,20 @@ public class TicTacToe extends JFrame {
     }
   }
 
-
-  public static void main(String[] args) {
-    new TicTacToe();
+  // Проверка на победу
+  public boolean checkForWin() {
+    // Проверка строк
+    for (int i = 0; i < 3; i++) {
+      if (buttons[i][0].getText().equals(buttons[i][1].getText()) &&
+          buttons[i][1].getText().equals(buttons[i][2].getText()) &&
+          !buttons[i][0].getText().equals("-")) {
+        return true;
+      }
+    }
+    return false;
   }
-}
+    public static void main (String[]args){
+      new TicTacToe();
+    }
+  }
 
