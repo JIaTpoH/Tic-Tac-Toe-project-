@@ -1,5 +1,5 @@
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class TicTacToe extends JFrame  {
@@ -50,10 +50,29 @@ public class TicTacToe extends JFrame  {
         return true;
       }
     }
-    return false;
-  }
-    public static void main (String[]args){
-      new TicTacToe();
+
+    // Проверка столбцов
+    for (int j = 0; j < 3; j++) {
+      if (buttons[0][j].getText().equals(buttons[1][j].getText()) &&
+          buttons[1][j].getText().equals(buttons[2][j].getText()) &&
+          !buttons[0][j].getText().equals("-")) {
+        return true;
+      }
     }
+
+    // Проверка диагоналей
+    if (buttons[0][0].getText().equals(buttons[1][1].getText()) &&
+        buttons[1][1].getText().equals(buttons[2][2].getText()) &&
+        !buttons[0][0].getText().equals("-")) {
+      return true;
+    }
+    return buttons[0][2].getText().equals(buttons[1][1].getText()) &&
+        buttons[1][1].getText().equals(buttons[2][0].getText()) &&
+        !buttons[0][2].getText().equals("-");
+}
+
+  public static void main(String[] args) {
+    new TicTacToe();
   }
+}
 
