@@ -17,7 +17,7 @@ public class TicTacToe extends JFrame implements ActionListener {
     JPanel panel = new JPanel(new GridLayout(3, 3));
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
-        buttons[i][j] = new JButton("-");
+        buttons[i][j] = new JButton("*");
         buttons[i][j].setFont(new Font("Arial", Font.PLAIN, 60));
         buttons[i][j].addActionListener(this);
         panel.add(buttons[i][j]);
@@ -44,7 +44,7 @@ public class TicTacToe extends JFrame implements ActionListener {
     for (int i = 0; i < 3; i++) {
       if (buttons[i][0].getText().equals(buttons[i][1].getText()) &&
           buttons[i][1].getText().equals(buttons[i][2].getText()) &&
-          !buttons[i][0].getText().equals("-")) {
+          !buttons[i][0].getText().equals("*")) {
         return true;
       }
     }
@@ -52,26 +52,25 @@ public class TicTacToe extends JFrame implements ActionListener {
     for (int j = 0; j < 3; j++) {
       if (buttons[0][j].getText().equals(buttons[1][j].getText()) &&
           buttons[1][j].getText().equals(buttons[2][j].getText()) &&
-          !buttons[0][j].getText().equals("-")) {
+          !buttons[0][j].getText().equals("*")) {
         return true;
       }
     }
 
     if (buttons[0][0].getText().equals(buttons[1][1].getText()) &&
         buttons[1][1].getText().equals(buttons[2][2].getText()) &&
-        !buttons[0][0].getText().equals("-")) {
+        !buttons[0][0].getText().equals("*")) {
       return true;
     }
     return buttons[0][2].getText().equals(buttons[1][1].getText()) &&
         buttons[1][1].getText().equals(buttons[2][0].getText()) &&
-        !buttons[0][2].getText().equals("-");
+        !buttons[0][2].getText().equals("*");
   }
-
 
   public boolean checkForDraw() {
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
-        if (buttons[i][j].getText().equals("-")) {
+        if (buttons[i][j].getText().equals("*")) {
           return false;
         }
       }
@@ -79,13 +78,43 @@ public class TicTacToe extends JFrame implements ActionListener {
     return true;
   }
 
-  public static void main(String[] args) {
-    new TicTacToe();
+
+  public void actionPerformed(ActionEvent e) {
+    JButton button = (JButton) e.getSource();
+    int row = -1, col = -1;
+
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        if (buttons[i][j] == button) {
+          row = i;
+          col = j;
+          break;
+        }
+      }
+    }
+    makeMove(row, col);
+
+    if (checkForWin()) {
+      JOptionPane.showMessageDialog(this,"Player " + currentPlayer + " lost!");
+      reset();
+    } else if (checkForDraw()) {
+      JOptionPane.showMessageDialog(this, "Draw!");
+      reset();
+    }
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e) {
 
+  public void reset() {
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        buttons[i][j].setText("*");
+      }
+    }
+    currentPlayer = 'X';
+  }
+
+  public static void main(String[] args) {
+    new TicTacToe();
   }
 }
 
