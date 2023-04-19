@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class TicTacToe extends JFrame implements ActionListener {
-  private  JButton[][] buttons;
+  private final JButton[][] buttons;
   private char currentPlayer;
 
   public TicTacToe() {
@@ -11,7 +11,6 @@ public class TicTacToe extends JFrame implements ActionListener {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setSize(300, 300);
     setLocationRelativeTo(null);
-
 
 
     buttons = new JButton[3][3];
@@ -32,6 +31,7 @@ public class TicTacToe extends JFrame implements ActionListener {
 
     setVisible(true);
   }
+
   private void chooseSymbol() {
     int option = JOptionPane.showOptionDialog(
         this,
@@ -46,11 +46,16 @@ public class TicTacToe extends JFrame implements ActionListener {
   }
 
   public void makeMove(int row, int col) {
-    buttons[row][col].setText(Character.toString(currentPlayer));
-    if (currentPlayer == 'X') {
-      currentPlayer = 'O';
+    JButton button = buttons[row][col];
+    if (button.getText().equals("*")) {
+      button.setText(Character.toString(currentPlayer));
+      if (currentPlayer == 'X') {
+        currentPlayer = 'O';
+      } else {
+        currentPlayer = 'X';
+      }
     } else {
-      currentPlayer = 'X';
+      JOptionPane.showMessageDialog(this,"Bro! select another window :)");
     }
   }
 
