@@ -12,7 +12,6 @@ public class TicTacToe extends JFrame {
     setSize(300, 300);
     setLocationRelativeTo(null);
 
-
     buttons = new JButton[3][3];
     JPanel panel = new JPanel(new GridLayout(3, 3));
     for (int i = 0; i < 3; i++) {
@@ -25,9 +24,24 @@ public class TicTacToe extends JFrame {
     }
     add(panel, BorderLayout.CENTER);
 
-    // Инициализация игрового поля
     currentPlayer = 'X';
 
     setVisible(true);
   }
+
+
+  public void makeMove(int row, int col) {
+    buttons[row][col].setText(Character.toString(currentPlayer));
+    if (currentPlayer == 'X') {
+      currentPlayer = 'O';
+    } else {
+      currentPlayer = 'X';
+    }
+  }
+
+
+  public static void main(String[] args) {
+    new TicTacToe();
+  }
 }
+
