@@ -24,19 +24,19 @@ public class TicTacToe extends JFrame implements ActionListener {
       }
     }
     add(panel, BorderLayout.CENTER);
-
     currentPlayer = 'X';
-
     chooseSymbol();
-
+    while (currentPlayer == '*') {
+      chooseSymbol();
+    }
     setVisible(true);
   }
 
   private void chooseSymbol() {
     int option = JOptionPane.showOptionDialog(
         this,
-        "Choose your symbol:",
-        "Symbol Selection",
+        "                Choose your symbol:",
+        "                     Symbol Selection",
         JOptionPane.DEFAULT_OPTION,
         JOptionPane.PLAIN_MESSAGE,
         null, new String[]{"X", "O"},
@@ -114,10 +114,10 @@ public class TicTacToe extends JFrame implements ActionListener {
     makeMove(row, col);
 
     if (checkForWin()) {
-      JOptionPane.showMessageDialog(this, "Player " + currentPlayer + " lost!");
+      JOptionPane.showMessageDialog(this, "Bro " + currentPlayer + " lost!");
       reset();
     } else if (checkForDraw()) {
-      JOptionPane.showMessageDialog(this, "Draw!");
+      JOptionPane.showMessageDialog(this, "Oh NO: Draw!");
       reset();
     }
   }
