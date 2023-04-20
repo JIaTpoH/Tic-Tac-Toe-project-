@@ -3,8 +3,8 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class TicTacToe extends JFrame implements ActionListener {
-  private final JButton[][] buttons;
-  private char currentPlayer;
+  final JButton[][] buttons;
+  char currentPlayer;
 
   public TicTacToe() {
     super("TicTacToe");
@@ -32,7 +32,7 @@ public class TicTacToe extends JFrame implements ActionListener {
     setVisible(true);
   }
 
-  private void chooseSymbol() {
+  void chooseSymbol() {
     int option = JOptionPane.showOptionDialog(
         this,
         "                Choose your symbol:",
@@ -42,6 +42,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         null, new String[]{"X", "O"},
         "X"
     );
+
     currentPlayer = option == 0 ? 'X' : 'O';
   }
 
